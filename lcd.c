@@ -23,15 +23,20 @@
  */
 
 #define LCD_DATA  
-#define LCD_RS  
-#define LCD_E   
+#define LCD_RS  LATC4
+#define LCD_E   LATC2
 
-#define TRIS_D7 
-#define TRIS_D6
-#define TRIS_D5 
-#define TRIS_D4 
-#define TRIS_RS 
-#define TRIS_E  
+#define TRIS_D7 TRISE1
+#define TRIS_D6 TRISE3
+#define TRIS_D5 TRISE5 
+#define TRIS_D4 TRISE7
+#define TRIS_RS TRISC4
+#define TRIS_E  TRISC2
+
+#define LAT_D7 LATE1
+#define LAT_D6 LATE3
+#define LAT_D5 LATE5
+#define LAT_D4 LATE7
 
 /* This function should take in a two-byte word and writes either the lower or upper
  * byte to the last four bits of LATE. Additionally, according to the LCD data sheet
@@ -41,23 +46,45 @@
  * when you are simply writing a character. Otherwise, RS is '0'.
  */
 void writeFourBits(unsigned char word, unsigned int commandType, unsigned int delayAfter, unsigned int lower){
-    //TODO:
+    //If lower is 0, write upper
     // set the commandType (RS value)
-    LATEbits.LATE0 = word&0x01;
-    LATEbits.LATE2 = word&0x02;
-    LATEbits.LATE4 = word&0x04;
-    LATEbits.LATE6 = word&0x08;
+    LATCbits.LATC4 = commandType;
+    
+    switch(lower) {
+        case 1:              //Lower
+    LATEbits.LATE7 = word&0x01;
+    LATEbits.LATE5 = word&0x02;
+    LATEbits.LATE3 = word&0x04;
+    LATEbits.LATE1 = word&0x08;
+    break;
+    
+        case 0:              //Upper
+    LATEbits.LATE7 = word&0x10;
+    LATEbits.LATE5 = word&0x20;
+    LATEbits.LATE3 = word&0x40;
+    LATEbits.LATE1 = word&0x80;
+    break;
+    }
     
     //enable
+    LATEbits.LCD_E = 1;
+    
     //delay
+    delayUs(delayAfter); //Is this the right amount of time?
+    
     //disable
+    LATEbits.LCD_E = 0;
 }
 
 /* Using writeFourBits, this function should write the two bytes of a character
  * to the LCD.
  */
 void writeLCD(unsigned char word, unsigned int commandType, unsigned int delayAfter){
-    //TODO:
+        
+    writeFourBits(word, commandType, delayAfter, 0);
+    delayUs(5); //FIXME get the right delay
+    writeFourBits(word, commandType, delayAfter, 1);
+    
 }
 
 /* Given a character, write it to the LCD. RS should be set to the appropriate value.
@@ -69,15 +96,79 @@ void printCharLCD(char c) {
  */
 void initLCD(void) {
     // Setup D, RS, and E to be outputs (0).
-
+    TRISCbits.TRIS_E = 0; //E
+    TRISCbits.TRIS_RS = 0; //RS
+    TRISEbits.TRIS_D4 = 0; //D4
+    TRISEbits.TRIS_D5 = 0; //D5
+    TRISEbits.TRIS_D6 = 0; //D6
+    TRISEbits.TRIS_D7 = 0; //D7
     // Initilization sequence utilizes specific LCD commands before the general configuration
     // commands can be utilized. The first few initilition commands cannot be done using the
     // WriteLCD function. Additionally, the specific sequence and timing is very important.
 
+    delayUs(15000); //delay 15ms
+    
     // Enable 4-bit interface
-
+    LATEbits.LCD_RS = 0;
+    //RW??
+    LATEbits.LAT_D7 = 0;
+    LATEbits.LAT_D6 = 0;
+    LATEbits.LAT_D5 = 1;
+    LATEbits.LAT_D4 = 1;
+    
+    delayUs(4200); //delay 4.2ms
+    delayUs(100);  //delay 100us
     // Function Set (specifies data width, lines, and font.
-
+    LATEbits.LCD_RS = 0;
+    LATEbits.LAT_D7 = 0;
+    LATEbits.LAT_D6 = 0;
+    LATEbits.LAT_D5 = 1;
+    LATEbits.LAT_D4 = 0;
+    //delay?
+    LATEbits.LCD_RS = 0;
+    LATEbits.LAT_D7 = 0;
+    LATEbits.LAT_D6 = 0;
+    LATEbits.LAT_D5 = 1;
+    LATEbits.LAT_D4 = 0;
+    //delay?
+    LATEbits.LAT_D7 = 1;    //Double line display?
+    LATEbits.LAT_D6 = 0;    //5x7 dot matrix??
+    //delay?
+    LATEbits.LCD_RS = 0;
+    LATEbits.LAT_D7 = 0;
+    LATEbits.LAT_D6 = 0;
+    LATEbits.LAT_D5 = 0;
+    LATEbits.LAT_D4 = 0;
+    //delay?
+    LATEbits.LCD_RS = 0;
+    LATEbits.LAT_D7 = 1;
+    LATEbits.LAT_D6 = 0;
+    LATEbits.LAT_D5 = 0;
+    LATEbits.LAT_D4 = 0;
+    //delay?
+    LATEbits.LCD_RS = 0;
+    LATEbits.LAT_D7 = 0;
+    LATEbits.LAT_D6 = 0;
+    LATEbits.LAT_D5 = 0;
+    LATEbits.LAT_D4 = 0;
+    //delay?
+    LATEbits.LCD_RS = 0;
+    LATEbits.LAT_D7 = 0;
+    LATEbits.LAT_D6 = 0;
+    LATEbits.LAT_D5 = 0;
+    LATEbits.LAT_D4 = 1;
+    //delay?
+    LATEbits.LCD_RS = 0;
+    LATEbits.LAT_D7 = 0;
+    LATEbits.LAT_D6 = 0;
+    LATEbits.LAT_D5 = 0;
+    LATEbits.LAT_D4 = 0;
+    //delay?
+    LATEbits.LCD_RS = 0;
+    LATEbits.LAT_D7 = 0;
+    LATEbits.LAT_D6 = 1;
+    LATEbits.LAT_D5 = 1; //I/D
+    LATEbits.LAT_D4 = 0; //Display Shift OFF
     // 4-bit mode initialization is complete. We can now configure the various LCD
     // options to control how the LCD will function.
 
@@ -103,6 +194,12 @@ void printStringLCD(const char* s) {
  * Clear the display.
  */
 void clearLCD(){
+    unsigned char upper = 0x00;
+    unsigned char lower = 0x01;
+    
+    writeFourBits(upper, 0, 5, 0);
+    writeFourBits(lower, 0, 5, 1);
+    delayUs(1640);
 }
 
 /*
