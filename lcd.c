@@ -1,8 +1,8 @@
 /*
  * File:   lcd.c
- * Authors:
+ * Authors: Evelyn Hunten
  *
- * Created on December 31, 2014, 1:39 PM
+ * Created: 2/16/16
  */
 
 /* TODO: Make define statements for each pin used in the LCD
