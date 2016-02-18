@@ -1,8 +1,8 @@
 /* 
  * File:   timer.h
- * Authors:
+ * Authors: Evelyn Hunten
  *
- * Created on December 30, 2014, 8:07 PM
+ * Created 2/16/16
  */
 
 #ifndef INITTIMER_H

@@ -1,8 +1,8 @@
 /*
  * File:   lcd.h
- * Authors:
+ * Authors: Evelyn Hunten
  *
- * Created on December 31, 2014, 1:39 PM
+ * Created 2/16/16
  */
 
 void writeLCD(unsigned char word, unsigned int commandType, unsigned int delay);
