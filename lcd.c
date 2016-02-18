@@ -126,46 +126,46 @@ void initLCD(void) {
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 1;
     LATEbits.LAT_D4 = 0;
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 0;
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 1;
     LATEbits.LAT_D4 = 0;
-    //delay?
+    delayUs(40);
     LATEbits.LAT_D7 = 1;    //Double line display?
     LATEbits.LAT_D6 = 0;    //5x7 dot matrix??
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 0;
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 0;
     LATEbits.LAT_D4 = 0;
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 1;
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 0;
     LATEbits.LAT_D4 = 0;
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 0;
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 0;
     LATEbits.LAT_D4 = 0;
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 0;
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 0;
     LATEbits.LAT_D4 = 1;
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 0;
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 0;
     LATEbits.LAT_D4 = 0;
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 0;
     LATEbits.LAT_D6 = 1;
