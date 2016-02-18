@@ -1,15 +1,30 @@
 /*
  * File:   timer.c
- * Authors:
+ * Authors: Evelyn Hunten
  *
- * Created on December 30, 2014, 8:07 PM
+ * Created 2/16/16
  */
 
 #include <xc.h>
 #include "timer.h"
 
+#define PRESC256 3
+#define CLEAR 0
+#define ENABLE 1
+#define DEFAULT 7
+#define PRVAL 49
+
 void delayUs(unsigned int delay){
 
-    //TODO: Create a delay for "delay" micro seconds using timer 2
+    //Create a delay for "delay" micro seconds using timer 2
+    
+      TMR2 = 0;
+      PR2 = delay*PRVAL;
+      IFS0bits.T2IF = 0;
+      T1CONbits.ON = 1;
+      
+      while (IFS0bits.T2IF == CLEAR) {
+        T2CONbits.ON = CLEAR;
+      }
     
 }
