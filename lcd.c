@@ -126,46 +126,46 @@ void initLCD(void) {
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 1;
     LATEbits.LAT_D4 = 0;
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 0;
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 1;
     LATEbits.LAT_D4 = 0;
-    //delay?
+    delayUs(40);
     LATEbits.LAT_D7 = 1;    //Double line display?
     LATEbits.LAT_D6 = 0;    //5x7 dot matrix??
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 0;
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 0;
     LATEbits.LAT_D4 = 0;
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 1;
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 0;
     LATEbits.LAT_D4 = 0;
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 0;
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 0;
     LATEbits.LAT_D4 = 0;
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 0;
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 0;
     LATEbits.LAT_D4 = 1;
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 0;
     LATEbits.LAT_D6 = 0;
     LATEbits.LAT_D5 = 0;
     LATEbits.LAT_D4 = 0;
-    //delay?
+    delayUs(40);
     LATEbits.LCD_RS = 0;
     LATEbits.LAT_D7 = 0;
     LATEbits.LAT_D6 = 1;
@@ -173,22 +173,21 @@ void initLCD(void) {
     LATEbits.LAT_D4 = 0; //Display Shift OFF
     // 4-bit mode initialization is complete. We can now configure the various LCD
     // options to control how the LCD will function.
-
+    delayUs(1000);
     // TODO: Display On/Off Control
         // Turn Display (D) Off
-    //writeLCD(0000001000, 0, 40); //turns off display
-
+    writeLCD(0000001000, 0, 40); //turns off display
+    
     
     // TODO: Clear Display (The delay is not specified in the data sheet at this point. You really need to have the clear display delay here.
-    //delay(clearDisplayDelay);
     clearLCD();
-    //delay();)
+    delayUs(1640);
     // TODO: Entry Mode Set
         // Set Increment Display, No Shift (i.e. cursor move)
     writeLCD(0000000110, 0, 40);
     // TODO: Display On/Off Control
         // Turn Display (D) On, Cursor (C) Off, and Blink(B) Off
-        //writeLCD(0000001100, 0, 40); //turns on display
+    writeLCD(0000001100, 0, 40); //turns on display
 }
 
 /*
@@ -197,7 +196,7 @@ void initLCD(void) {
  * Since a string is just a character array, try to be clever with your use of pointers.
  */
 void printStringLCD(const char* s) {
-    //TODO:
+    
 }
 
 /*
@@ -209,7 +208,7 @@ void clearLCD(){
     
     writeFourBits(upper, 0, 5, 0);
     writeFourBits(lower, 0, 5, 1);
-    delayUs(1640);
+   // delayUs(1640);
 }
 
 /*
