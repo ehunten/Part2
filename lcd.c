@@ -70,7 +70,7 @@ void writeFourBits(unsigned char word, unsigned int commandType, unsigned int de
     LATEbits.LCD_E = 1;
     
     //delay
-    delayUs(delayAfter); //Is this the right amount of time?
+    delayUs(delayAfter); 
     
     //disable
     LATEbits.LCD_E = 0;
@@ -107,6 +107,8 @@ void initLCD(void) {
     // WriteLCD function. Additionally, the specific sequence and timing is very important.
 
     delayUs(15000); //delay 15ms
+    
+    LATEbits.LCD_E = 1;
     
     // Enable 4-bit interface
     LATEbits.LCD_RS = 0;
@@ -174,14 +176,19 @@ void initLCD(void) {
 
     // TODO: Display On/Off Control
         // Turn Display (D) Off
-    //writeLCD(0000001000, 0, 40);
-    //writeLCD(0000001000, 0, 40);
+    //writeLCD(0000001000, 0, 40); //turns off display
+
     
     // TODO: Clear Display (The delay is not specified in the data sheet at this point. You really need to have the clear display delay here.
+    //delay(clearDisplayDelay);
+    clearLCD();
+    //delay();)
     // TODO: Entry Mode Set
         // Set Increment Display, No Shift (i.e. cursor move)
+    writeLCD(0000000110, 0, 40);
     // TODO: Display On/Off Control
         // Turn Display (D) On, Cursor (C) Off, and Blink(B) Off
+        //writeLCD(0000001100, 0, 40); //turns on display
 }
 
 /*

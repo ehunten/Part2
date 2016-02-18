@@ -1,5 +1,5 @@
-build/default/production/timer.o:  \
-timer.c  \
+build/default/production/main.o:  \
+main.c  \
  ../../../../../../Program\ Files\ (x86)/Microchip/xc32/v1.40/pic32-libs/include/xc.h  \
  ../../../../../../Program\ Files\ (x86)/Microchip/xc32/v1.40/pic32-libs/include/proc/p32mx470f512l.h  \
  ../../../../../../Program\ Files\ (x86)/Microchip/xc32/v1.40/pic32-libs/include/proc/ppic32mx.h  \
@@ -10,4 +10,8 @@ timer.c  \
  ../../../../../../Program\ Files\ (x86)/Microchip/xc32/v1.40/pic32-libs/include/stdio.h  \
  ../../../../../../Program\ Files\ (x86)/Microchip/xc32/v1.40/pic32-libs/include/stdarg.h  \
  ../../../../../../Program\ Files\ (x86)/Microchip/xc32/v1.40/pic32-libs/include/sys/l1cache.h  \
- timer.h 
+ ../../../../../../Program\ Files\ (x86)/Microchip/xc32/v1.40/pic32-libs/include/sys/attribs.h  \
+ lcd.h  \
+timer.h  \
+config.h  \
+interrupt.h 
