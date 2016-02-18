@@ -12,14 +12,12 @@
 #define CLEAR 0
 #define ENABLE 1
 #define DEFAULT 7
-#define PRVAL 6249
+#define PRVAL 49
 
 void delayUs(unsigned int delay){
 
-    //TODO: Create a delay for "delay" micro seconds using timer 2
+    //Create a delay for "delay" micro seconds using timer 2
     
-    //FIXME change PRVAL to correct value
-    //FIXME change to microsecond delay
       TMR2 = 0;
       PR2 = delay*PRVAL;
       IFS0bits.T2IF = 0;

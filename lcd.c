@@ -90,7 +90,7 @@ void writeLCD(unsigned char word, unsigned int commandType, unsigned int delayAf
 /* Given a character, write it to the LCD. RS should be set to the appropriate value.
  */
 void printCharLCD(char c) {
-    //TODO:
+    writeLCD(c, 1, 40);
 }
 /*Initialize the LCD
  */
@@ -174,6 +174,9 @@ void initLCD(void) {
 
     // TODO: Display On/Off Control
         // Turn Display (D) Off
+    //writeLCD(0000001000, 0, 40);
+    //writeLCD(0000001000, 0, 40);
+    
     // TODO: Clear Display (The delay is not specified in the data sheet at this point. You really need to have the clear display delay here.
     // TODO: Entry Mode Set
         // Set Increment Display, No Shift (i.e. cursor move)

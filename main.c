@@ -19,6 +19,7 @@
 int main(void)
 {
     SYSTEMConfigPerformance(10000000);
+    
     while(1)
     {
         testLCD();
