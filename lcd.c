@@ -70,12 +70,12 @@ void writeFourBits(unsigned char word, unsigned int commandType, unsigned int de
     LCD_E = 1;
     
     //delay
-    delayUs(delayAfter); 
+    delayUs(500); 
     
     //disable
     LCD_E = 0;
     
-    delayUs(delayAfter);
+    delayUs(200);
 }
 
 /* Using writeFourBits, this function should write the two bytes of a character
@@ -84,7 +84,6 @@ void writeFourBits(unsigned char word, unsigned int commandType, unsigned int de
 void writeLCD(unsigned char word, unsigned int commandType, unsigned int delayAfter){
         
     writeFourBits(word, commandType, delayAfter, 0);
-    //delayUs(5); //FIXME get the right delay
     writeFourBits(word, commandType, delayAfter, 1);
     
 }
@@ -107,90 +106,54 @@ void initLCD(void) {
     // Initilization sequence utilizes specific LCD commands before the general configuration
     // commands can be utilized. The first few initilization commands cannot be done using the
     // WriteLCD function. Additionally, the specific sequence and timing is very important.
-
+    LCD_E = 0;
+    
     delayUs(15000); //delay 15ms
     
     LCD_E = 1;
-    
+    //writeFourBits(unsigned char word, unsigned int commandType, unsigned int delayAfter, unsigned int lower);
     // Enable 4-bit interface
-    LCD_RS = 0;
-    LAT_D7 = 0;
-    LAT_D6 = 0;
-    LAT_D5 = 1;
-    LAT_D4 = 1;
-    
-    delayUs(4200); //delay 4.2ms
-    delayUs(100);  //delay 100us
+    writeFourBits(0b0011, 0, 4200, 1);
+    writeFourBits(0b0011, 0, 500, 1);
+    writeFourBits(0b0011, 0, 500, 1);
     // Function Set (specifies data width, lines, and font.
-    LCD_RS = 0;
-    LAT_D7 = 0;
-    LAT_D6 = 0;
-    LAT_D5 = 1;
-    LAT_D4 = 0;
-    delayUs(40);
-    LCD_RS = 0;
-    LAT_D7 = 0;
-    LAT_D6 = 0;
-    LAT_D5 = 1;
-    LAT_D4 = 0;
-    //delayUs(40);
-    LAT_D7 = 1;    //Double line display?
-    LAT_D6 = 0;    //5x7 dot matrix??
-    delayUs(40);
-    LCD_RS = 0;
-    LAT_D7 = 0;
-    LAT_D6 = 0;
-    LAT_D5 = 0;
-    LAT_D4 = 0;
-    delayUs(40);
-    LCD_RS = 0;
-    LAT_D7 = 1;
-    LAT_D6 = 0;
-    LAT_D5 = 0;
-    LAT_D4 = 0;
-    delayUs(40);
-    LCD_RS = 0;
-    LAT_D7 = 0;
-    LAT_D6 = 0;
-    LAT_D5 = 0;
-    LAT_D4 = 0;
-    delayUs(40);
-    LCD_RS = 0;
-    LAT_D7 = 0;
-    LAT_D6 = 0;
-    LAT_D5 = 0;
-    LAT_D4 = 1;
-    delayUs(40);
-    LCD_RS = 0;
-    LAT_D7 = 0;
-    LAT_D6 = 0;
-    LAT_D5 = 0;
-    LAT_D4 = 0;
-    delayUs(40);
-    LCD_RS = 0;
-    LAT_D7 = 0;
-    LAT_D6 = 1;
-    LAT_D5 = 1; //I/D
-    LAT_D4 = 0; //Display Shift OFF
+    writeFourBits(0b0010, 0, 500, 1);
+    
+//    writeFourBits(0b0010, 0, 40, 1);
+//    writeFourBits(0b1010, 0, 40, 1);
+    writeLCD(0b00101010, 0, 500);
+    
+//    writeFourBits(0b0000, 0, 40, 1);
+//    writeFourBits(0b1000, 0, 40, 1);
+    writeLCD(0b00001000, 0, 500);
+    
+//    writeFourBits(0b0000, 0, 40, 1);
+//    writeFourBits(0b0001, 0, 40, 1);
+    writeLCD(0b00000001, 500, 1);
+
+    
+//    writeFourBits(0b0000, 0, 40, 1);
+//    writeFourBits(0b0110, 0, 40, 1);
+    writeLCD(0b00000110, 500, 1);
     // 4-bit mode initialization is complete. We can now configure the various LCD
     // options to control how the LCD will function.
     
     delayUs(1000);
     //Display On/Off Control
     // Turn Display (D) Off
-    writeLCD(0b0000001000, 0, 40); //turns off display
+    writeLCD(0b0000001000, 0, 400); //turns off display
     
     //Clear Display (The delay is not specified in the data sheet at this point. You really need to have the clear display delay here.
     clearLCD();
-    delayUs(1640);
+    delayUs(1700);
     
     //Entry Mode Set
     // Set Increment Display, No Shift (i.e. cursor move)
-    writeLCD(0b0000000110, 0, 40);
+    writeLCD(0b0000000110, 0, 400);
     
     //Display On/Off Control
     // Turn Display (D) On, Cursor (C) Off, and Blink(B) Off
-    writeLCD(0b0000001100, 0, 40); //turns on display
+    writeLCD(0b0000001100, 0, 400); //turns on display
 }
 
 /*

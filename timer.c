@@ -34,8 +34,8 @@ void delayUs(unsigned int delay){
       IFS0bits.T2IF = 0;
       T1CONbits.ON = 1;
       
-      while (IFS0bits.T2IF == CLEAR) {
-        T2CONbits.ON = CLEAR;
-      }
+      while (IFS0bits.T2IF == CLEAR);
+      T2CONbits.ON = CLEAR;
+      
     
 }
