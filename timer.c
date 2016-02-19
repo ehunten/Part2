@@ -32,10 +32,10 @@ void delayUs(unsigned int delay){
       TMR2 = 0;
       PR2 = delay*PRVAL;
       IFS0bits.T2IF = 0;
-      T1CONbits.ON = 1;
+      T2CONbits.ON = 1;
       
       while (IFS0bits.T2IF == CLEAR);
       T2CONbits.ON = CLEAR;
-      
+      IFS0bits.T2IF = 0;
     
 }
