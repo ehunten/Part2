@@ -19,6 +19,8 @@
 int main(void)
 {
     SYSTEMConfigPerformance(10000000);
+    initTimer2();
+    initLCD();
     
     while(1)
     {
