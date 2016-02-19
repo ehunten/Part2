@@ -5,11 +5,11 @@
  * Created 2/16/16
  */
 
-void writeLCD(unsigned char word, unsigned int commandType, unsigned int delay);
-void writeFourBits(unsigned char word, unsigned int commandType, unsigned int delayAfter, unsigned int lower);
-void initLCD(void);
-void clearLCD(void);
-void moveCursorLCD(unsigned char x, unsigned char y);
-void printCharLCD(char c);
-void printStringLCD(const char* s);
-void testLCD();
+void writeLCD(unsigned char word, unsigned int commandType, unsigned int delay); //done?
+void writeFourBits(unsigned char word, unsigned int commandType, unsigned int delayAfter, unsigned int lower); //done?
+void initLCD(void); //done?
+void clearLCD(void); //done?
+void moveCursorLCD(unsigned char x, unsigned char y); //done?
+void printCharLCD(char c); //Done?
+void printStringLCD(const char* s); //TODO
+void testLCD(); //provided
